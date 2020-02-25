@@ -48,22 +48,9 @@ class InteractiveRecord
   end
   
   def self.find_by_name(name)
-  sql = "SELECT * FROM #{self.table_name} WHERE name = ?"
-  DB[:conn].execute(sql, name)
-end
+    sql = "SELECT * FROM #{self.table_name} WHERE name = ?"
+    DB[:conn].execute(sql, name)
+  end
 
-  def find_by(properties = {})
-            cleaned_props = []
-            values = []
-            acceptable_properties = column_names
-            properties.each do |k,v|
-                if acceptable_properties.include?(k.to_s)
-                    values << v
-                    cleaned_props << "#{k} = ?"
-                end
-            end
-            params_to_insert = cleaned_props.join(", ")
-            sql = "SELECT * FROM #{table_name} WHERE #{params_to_insert};"
-            DB[:conn].execute(sql, values)
-        end
+  
 end
