@@ -64,5 +64,6 @@ end
             end
             params_to_insert = cleaned_props.join(", ")
             sql = "SELECT * FROM #{table_name} WHERE #{params_to_insert};"
-            DB
+            DB[:conn].execute(sql, values)
+        end
 end
